@@ -6,36 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Challenge - DOM</title>
   </head>
-  <body>
-    <div id="app">
+  <body style="background-color: grey;">
+    <div id="app" style="width: 250px;" margin="center">
       <!-- TODO: Buatlah sebuah header dengan id todo-title -->
-      <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
+    <h1 id="todo-title">To-Do List</h1>
+    <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
+    <p id="todo-subtitle">~ Today I need To ~</p>
 
       <!-- Section: input -->
       <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
+      <input type="text" id="todo-input"/>
       <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
-
+      <button type="button" id="todo-submit"> Submit </button>
       <!-- Section output -->
       <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+        <li>
+          <ul id="todo-output" ></ul>
+        </li>
     </div>
-
+    <style>
+      #app {
+        background-color: white;
+        
+        border-radius: 10px;
+        height: 250px;
+        }
+        p {
+          text-align: center;
+          justify-content: center;
+        }
+        h1 {
+          text-align: center;
+        }
+        li {
+          margin-left: 10px;
+        }
+    </style>
     <!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
     <script>
       // TODO: Deklarasi variable sesuai dengan kebutuhan di sini
-      let button;
-      let input;
-      let output;
+      let button = document.querySelector("#todo-submit");
+      let input = document.querySelector("#todo-input");
+      let output = document.querySelector("#todo-output");
 
       // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
+      function fnClickHandler(toDoItem) {
+        output.appendChild(createList(toDoItem));
+      }
+
+      function createList(name){
+        let li = document.createElement("li");
+        li.textContent = name;
+        li.className = "list-item";
+        return li;
+      }
 
       // TODO: register event onclick / addEventListener untuk button
       // akan menjalankan fungsi fnClickHandler
+      button.addEventListener("click", () => {
+        const inputan = input.value;
+        fnClickHandler(inputan);
+        input.value = "";
+      });
       
       // TODO: register event onkeypress / addEventListener untuk input
       // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
+      input.addEventListener ("keypress", ()=> {
+        if(event.key === "Enter"){
+          const inputan = input.value;
+          fnClickHandler(inputan);
+          input.value = "";
+        }
+      });
     </script>
   </body>
 </html>
